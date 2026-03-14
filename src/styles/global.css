@@ -1,0 +1,79 @@
+@import "tailwindcss";
+@import "aos/dist/aos.css";
+
+@theme {
+  --color-sand-50: #faf8f5;
+  --color-sand-100: #f0ece5;
+  --color-sand-200: #e0d8cb;
+  --color-sand-300: #c9bba6;
+  --color-sand-400: #b09a80;
+  --color-sand-500: #9a8068;
+  --color-sand-600: #84695a;
+  --color-sand-700: #6d564b;
+  --color-sand-800: #5a4840;
+  --color-sand-900: #4a3d37;
+
+  --color-navy-800: #1a2332;
+  --color-navy-900: #0f1621;
+  --color-navy-950: #080c14;
+
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-sand-100);
+  background-color: var(--color-navy-950);
+}
+
+/* Hero word reveal */
+.hero-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(40px) rotateX(15deg);
+  filter: blur(4px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-word.revealed {
+  opacity: 1;
+  transform: translateY(0) rotateX(0deg);
+  filter: blur(0);
+}
+
+/* Grain canvas — rendered by WebGL, no CSS animation needed */
+
+/* Hero parallax background — real image with CSS pattern fallback */
+.hero-parallax-bg {
+  background-image:
+    url('/hero-bg.jpg'),
+    radial-gradient(ellipse at 30% 60%, rgba(26, 35, 50, 0.8) 0%, transparent 70%),
+    radial-gradient(ellipse at 70% 40%, rgba(15, 22, 33, 0.6) 0%, transparent 60%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 40px,
+      rgba(176, 154, 128, 0.03) 40px,
+      rgba(176, 154, 128, 0.03) 41px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 40px,
+      rgba(176, 154, 128, 0.02) 40px,
+      rgba(176, 154, 128, 0.02) 41px
+    ),
+    radial-gradient(circle at 20% 80%, rgba(176, 154, 128, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(74, 61, 55, 0.15) 0%, transparent 40%),
+    linear-gradient(160deg, #0f1621 0%, #1a2332 40%, #0f1621 100%);
+  background-size: cover, 100% 100%, 100% 100%, 40px 40px, 40px 40px, 100% 100%, 100% 100%, 100% 100%;
+  background-position: center;
+}
