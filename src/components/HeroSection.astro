@@ -1,5 +1,17 @@
 ---
 import { Image } from 'astro:assets';
+
+const compassTicks = Array.from({ length: 16 }, (_, i) => {
+  const a = (i * 22.5 * Math.PI) / 180;
+  const isCard = i % 4 === 0;
+  return {
+    x1: +(Math.sin(a) * (isCard ? 60 : 64)).toFixed(2),
+    y1: +(-Math.cos(a) * (isCard ? 60 : 64)).toFixed(2),
+    x2: +(Math.sin(a) * 69).toFixed(2),
+    y2: +(-Math.cos(a) * 69).toFixed(2),
+    isCard,
+  };
+});
 ---
 
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden sticky top-0 z-0" id="hero">
@@ -12,7 +24,7 @@ import { Image } from 'astro:assets';
 
   <div class="absolute top-0 left-1/2 -translate-x-1/2 w-px h-32 bg-gradient-to-b from-transparent to-sand-400/30"></div>
 
-  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center" id="hero-content">
     <p class="text-sand-400 text-xs sm:text-sm tracking-[0.3em] uppercase mb-6 font-light opacity-0" id="hero-anno">
       Øster Riisøer – Vester Riisøer | Risør
     </p>
@@ -48,6 +60,42 @@ import { Image } from 'astro:assets';
 
   <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
     <div class="w-px h-12 bg-gradient-to-b from-sand-400/50 to-transparent animate-pulse"></div>
+  </div>
+
+  <!-- Compass Rose -->
+  <div class="absolute right-8 xl:right-24 top-1/2 -translate-y-1/2 hidden lg:block pointer-events-none select-none">
+    <svg id="compass-rose" width="160" height="160" viewBox="-72 -72 144 144" xmlns="http://www.w3.org/2000/svg" class="opacity-0">
+      <!-- Outer ring -->
+      <circle r="70" fill="none" stroke="rgba(201,187,166,0.15)" stroke-width="0.5" />
+
+      <!-- Tick marks -->
+      {compassTicks.map((t) => (
+        <line
+          x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2}
+          stroke={`rgba(201,187,166,${t.isCard ? 0.4 : 0.18})`}
+          stroke-width={t.isCard ? 1 : 0.5}
+        />
+      ))}
+
+      <!-- Intercardinal arms (NE/NW/SE/SW) -->
+      <polygon transform="rotate(45)"  points="0,-46 4,0 0,46 -4,0" fill="rgba(201,187,166,0.2)" />
+      <polygon transform="rotate(-45)" points="0,-46 4,0 0,46 -4,0" fill="rgba(201,187,166,0.2)" />
+
+      <!-- Cardinal arms — two-tone: N & E bright, S & W dark -->
+      <polygon points="0,-62 7,0 -7,0"  fill="rgba(201,187,166,0.75)" /> <!-- N -->
+      <polygon points="0,62 7,0 -7,0"   fill="rgba(201,187,166,0.22)" /> <!-- S -->
+      <polygon points="62,0 0,7 0,-7"   fill="rgba(201,187,166,0.50)" /> <!-- E -->
+      <polygon points="-62,0 0,7 0,-7"  fill="rgba(201,187,166,0.22)" /> <!-- W -->
+
+      <!-- Center -->
+      <circle r="7"   fill="none" stroke="rgba(201,187,166,0.35)" stroke-width="1" />
+      <circle r="2.5" fill="rgba(201,187,166,0.7)" />
+
+      <!-- N label -->
+      <text x="0" y="-50" text-anchor="middle" dominant-baseline="middle"
+        font-size="9" font-family="Cormorant Garamond, Georgia, serif"
+        fill="rgba(201,187,166,0.65)" letter-spacing="2">N</text>
+    </svg>
   </div>
 </section>
 
@@ -143,5 +191,24 @@ import { Image } from 'astro:assets';
     setTimeout(() => { if (line) { line.style.transition = "transform 0.8s cubic-bezier(0.16,1,0.3,1)"; line.style.transform = "scaleX(1)"; } }, base + 200);
     setTimeout(() => { if (desc) { desc.style.transition = "opacity 0.8s ease, transform 0.8s ease"; desc.style.opacity = "1"; desc.style.transform = "translateY(0)"; } }, base + 500);
     setTimeout(() => { if (cta) { cta.style.transition = "opacity 0.8s ease, transform 0.8s ease"; cta.style.opacity = "1"; cta.style.transform = "translateY(0)"; } }, base + 800);
+    const compass = document.getElementById("compass-rose");
+    setTimeout(() => { if (compass) { compass.style.transition = "opacity 1.5s ease"; compass.style.opacity = "0.85"; } }, base + 1200);
+  })();
+
+  // Hero fade-out on scroll
+  (() => {
+    const content = document.getElementById("hero-content");
+    if (!content) return;
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const progress = Math.min(1, window.scrollY / (window.innerHeight * 0.55));
+        content.style.opacity = String(Math.max(0, 1 - progress * 1.5));
+        content.style.transform = `translateY(${-progress * 70}px)`;
+        ticking = false;
+      });
+    }, { passive: true });
   })();
 </script>
