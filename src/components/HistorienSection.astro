@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 const cards = [
   {
     id: "modal-foreningen",
@@ -60,14 +61,16 @@ const cards = [
         >
           <div class="relative h-48 overflow-hidden bg-navy-900/60 flex items-center justify-center">
             {card.img ? (
-              <img
+              <Image
                 src={card.img}
                 alt={card.title}
+                width={600}
+                height={400}
                 class={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${card.invert ? "invert opacity-50" : "opacity-70"}`}
                 loading="lazy"
               />
             ) : (
-              <img src="/historien/silhouette.jpg" alt={card.title} class="w-32 invert opacity-20" loading="lazy" />
+              <Image src="/historien/silhouette.jpg" alt={card.title} width={128} height={100} class="w-32 invert opacity-20" loading="lazy" />
             )}
           </div>
           <div class="flex flex-col flex-1 p-6 gap-4">
@@ -94,7 +97,7 @@ const cards = [
 
           {m.img && (
             <div class="shrink-0">
-              <img src={m.img} alt={m.title} class={`w-full h-auto max-h-64 object-contain ${m.invert ? "invert opacity-40" : "opacity-70"}`} />
+              <Image src={m.img} alt={m.title} width={1200} height={600} class={`w-full h-auto max-h-64 object-contain ${m.invert ? "invert opacity-40" : "opacity-70"}`} />
             </div>
           )}
           <div class="p-8 sm:p-10 overflow-y-auto">
