@@ -51,6 +51,12 @@ body {
 
 /* Grain canvas — rendered by WebGL, no CSS animation needed */
 
+/* Global blur when any modal is open */
+body.modal-blur > *:not(.hist-modal):not([id="lightbox"]) {
+  filter: blur(6px);
+  transition: filter 0.3s ease;
+}
+
 /* Hero parallax background — real image with CSS pattern fallback */
 .hero-parallax-bg {
   background-image:

@@ -1,0 +1,156 @@
+---
+const cards = [
+  {
+    id: "modal-foreningen",
+    img: null,
+    invert: false,
+    title: "Om foreningen",
+    teaser: "Kystens Bevoktere er en forening i Risør dedikert til å bevare og formidle arven etter Norges historiske kystforsvarere fra krigsårene 1807–1814.",
+    body: [
+      "Foreningen Kystens Bevoktere ble stiftet i Risør for å ta vare på og formidle historien om de modige mennene som en gang vogtet den norske kysten under Napoleonskrigene.",
+      "Kystens Bevoktere levde et liv tett knyttet til havet og dets uforutsigbare krefter. De voktet fyr, holmer og skipsleder for å sikre at sjøfolk fant veien trygt langs kysten.",
+      "Arbeidsdagene var lange og preget av kulde, vind og fukt, men plikten stod alltid først. Fellesskapet mellom bevokterne var sterkt, bygget på tillit og felles erfaringer fra harde vintre og stormnetter.",
+      "Vi i Øster Riisøer – Vester Riisøer holder denne arven levende gjennom restaurering av vår historiske kanonjolle og deltakelse i kystkulturelle arrangementer. Grunnlagt i Risør. Hjemmebase: Øster Riisøer 3.",
+    ],
+  },
+  {
+    id: "modal-kystforsvar",
+    img: "/historien/offiser.jpg",
+    invert: false,
+    title: "Kystforsvaret 1807–1814",
+    teaser: "Under Napoleonskrigene utviklet Danmark-Norge et nettverk av kanonjoller langs kysten — smidige og dødelige krigsskip som forsvarte norske farvann.",
+    body: [
+      "Under Napoleonskrigene (1807–1814) var Danmark-Norge i krig med Storbritannia, som dominerte åpent hav med sin overlegne flåte. Som svar utviklet den dansk-norske marinen et nettverk av kanonjolleflotilje langs kysten.",
+      "Kanonjollene var ideelle for kystkrig: de trakk lite vann, kunne ro i vindstille og var vanskelige å treffe for store krigsskip. De opererte i skjærgården der britiske fregatter ikke kunne følge etter.",
+      "Risør var et viktig senter for denne flotiljen. Den 6. juli 1812 deltok jollebesetningene fra Øster og Vester Riisøer i trefninger som forsvarte kysthandelen og hindret britisk plyndring av lokalsamfunnene.",
+    ],
+  },
+  {
+    id: "modal-jolle",
+    img: "/historien/sailors.jpg",
+    invert: false,
+    title: "Kanonjolle Øster Riisøer 3",
+    teaser: "Vår historiske kanonjolla fra 1807–1814-tiden. 24-punderkanon, nå under restaurering — et levende monument over Norges kystforsvar.",
+    body: [
+      "Kanonjolle «Øster Riisøer 3» er vår stolthet — en rekonstruksjon av de historiske kanonjollene som opererte langs kysten av Aust-Agder under Napoleonskrigene, bygget etter historiske tegninger fra begynnelsen av 1800-tallet.",
+      "Båten er utstyrt med en 24-punderkanon støpt på Åkers styckebruk i Sverige i 1794. For øyeblikket er jolla under restaurering, der motor og årer skiftes for å bringe den tilbake til full operativ stand.",
+      "Kanonen returneres snart til Marienmuseet i Danmark, mens jolla seiler videre i de samme farvannene der forfedrene en gang vogtet kysten. Båten er med på Trebåtfestivalen i Risør, minnemarkeringer og salutter.",
+    ],
+  },
+];
+---
+
+<section id="om-oss" class="relative z-10 bg-navy-950 rounded-t-3xl py-24 sm:py-32 border-t border-sand-300/10 shadow-[0_-30px_60px_rgba(0,0,0,0.5)]">
+  <div class="max-w-5xl mx-auto px-6">
+    <div data-aos="fade-up">
+      <p class="text-sand-500 text-xs tracking-[0.3em] uppercase mb-4 font-light">01</p>
+      <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-sand-50 mb-6">Om oss</h2>
+      <div class="w-12 h-px bg-sand-400/40 mb-8"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {cards.map((card, i) => (
+        <div
+          class="les-mer-btn flex flex-col border border-sand-300/10 rounded-sm overflow-hidden bg-navy-900/40 group cursor-pointer hover:border-sand-300/30 transition-colors duration-200"
+          data-aos="fade-up"
+          data-aos-delay={String(i * 150)}
+          data-modal={card.id}
+          role="button"
+          tabindex="0"
+        >
+          <div class="relative h-48 overflow-hidden bg-navy-900/60 flex items-center justify-center">
+            {card.img ? (
+              <img
+                src={card.img}
+                alt={card.title}
+                class={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${card.invert ? "invert opacity-50" : "opacity-70"}`}
+                loading="lazy"
+              />
+            ) : (
+              <img src="/historien/silhouette.jpg" alt={card.title} class="w-32 invert opacity-20" loading="lazy" />
+            )}
+          </div>
+          <div class="flex flex-col flex-1 p-6 gap-4">
+            <h3 class="font-serif text-lg text-sand-100">{card.title}</h3>
+            <p class="text-sand-400/70 text-sm leading-relaxed flex-1">{card.teaser}</p>
+            <span class="self-start text-xs tracking-widest uppercase text-sand-400 border border-sand-400/30 px-4 py-2 group-hover:border-sand-300 group-hover:text-sand-200 transition-colors duration-200">
+              Les mer
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {cards.map((m) => (
+      <div id={m.id} class="hist-modal fixed inset-0 z-[200] hidden items-center justify-center p-4" role="dialog" aria-modal="true">
+        <div class="hist-modal-backdrop absolute inset-0 bg-navy-950/80"></div>
+        <div class="relative z-10 bg-navy-900 border border-sand-300/10 rounded-sm max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl">
+          <!-- Close button — always top right, outside scroll area -->
+          <button class="hist-modal-close absolute top-3 right-3 z-20 w-8 h-8 flex items-center justify-center text-sand-400 hover:text-sand-100 transition-colors bg-navy-900/80 rounded-full" aria-label="Lukk">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          {m.img && (
+            <div class="shrink-0">
+              <img src={m.img} alt={m.title} class={`w-full h-auto max-h-64 object-contain ${m.invert ? "invert opacity-40" : "opacity-70"}`} />
+            </div>
+          )}
+          <div class="p-8 sm:p-10 overflow-y-auto">
+            <h3 class="font-serif text-2xl sm:text-3xl text-sand-50 mb-6">{m.title}</h3>
+            <div class="w-8 h-px bg-sand-400/30 mb-6"></div>
+            {m.body.map((para) => (
+              <p class="text-sand-300/80 text-sm sm:text-base leading-relaxed mb-4 last:mb-0">{para}</p>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  // Teleport modals to <body> on page load so blur doesn't affect them
+  document.querySelectorAll<HTMLElement>(".hist-modal").forEach((m) => document.body.appendChild(m));
+
+  function openHistModal(id: string) {
+    const modal = document.getElementById(id);
+    if (!modal) return;
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+    document.body.classList.add("modal-blur");
+    document.body.style.overflow = "hidden";
+    const box = modal.querySelector<HTMLElement>(".relative.z-10");
+    if (box) {
+      box.style.cssText = "opacity:0;transform:translateY(20px) scale(0.97);transition:opacity 0.3s ease,transform 0.3s ease";
+      requestAnimationFrame(() => { box.style.opacity = "1"; box.style.transform = "translateY(0) scale(1)"; });
+    }
+  }
+
+  function closeHistModal(modal: HTMLElement) {
+    const box = modal.querySelector<HTMLElement>(".relative.z-10");
+    if (box) { box.style.opacity = "0"; box.style.transform = "translateY(20px) scale(0.97)"; }
+    setTimeout(() => {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      document.body.classList.remove("modal-blur");
+      document.body.style.overflow = "";
+    }, 250);
+  }
+
+  document.querySelectorAll<HTMLButtonElement>(".les-mer-btn").forEach((btn) => {
+    btn.addEventListener("click", () => openHistModal(btn.dataset.modal!));
+  });
+
+  document.querySelectorAll<HTMLElement>(".hist-modal").forEach((modal) => {
+    modal.querySelector(".hist-modal-close")?.addEventListener("click", () => closeHistModal(modal));
+    modal.querySelector(".hist-modal-backdrop")?.addEventListener("click", () => closeHistModal(modal));
+
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape")
+      document.querySelectorAll<HTMLElement>(".hist-modal:not(.hidden)").forEach(closeHistModal);
+  });
+</script>

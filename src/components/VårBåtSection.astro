@@ -1,0 +1,79 @@
+---
+---
+
+<section id="var-bat" class="relative z-10 bg-navy-950 py-24 sm:py-32 border-t border-sand-300/10">
+  <div class="max-w-5xl mx-auto px-6">
+    <div data-aos="fade-up">
+      <p class="text-sand-500 text-xs tracking-[0.3em] uppercase mb-4 font-light">02</p>
+      <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-sand-50 mb-6">Vår båt</h2>
+      <div class="w-12 h-px bg-sand-400/40 mb-8"></div>
+    </div>
+
+    <!-- Main boat photo + text -->
+    <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+      <div data-aos="fade-up" data-aos-delay="100">
+        <p class="text-sand-400/80 text-xs tracking-[0.2em] uppercase mb-3 font-light">Kanonjolla</p>
+        <h3 class="font-serif text-2xl sm:text-3xl text-sand-50 mb-4">Øster Riisøer 3</h3>
+        <p class="text-sand-300/70 text-sm sm:text-base leading-relaxed mb-8">
+          Vår stolthet — den historiske kanonjolla fra 1807–1814-tiden. Bygget etter originale tegninger og spesifikasjoner fra begynnelsen av 1800-tallet.
+        </p>
+
+        <ul class="space-y-5 mb-8">
+          {[
+            "24-punderkanon støpt på Åkers styckebruk (Sverige, 1794)",
+            "Nå under restaurering: motor og årer skiftes",
+            "Kanonen returneres snart til Marienmuseet i Danmark",
+          ].map((item) => (
+            <li class="flex items-start gap-4 text-sand-300/80 text-sm leading-relaxed">
+              <span class="w-px h-4 bg-sand-400/40 mt-0.5 shrink-0"></span>
+              {item}
+            </li>
+          ))}
+        </ul>
+
+        <p class="text-sand-400/60 text-sm leading-relaxed italic">
+          Båten er med på Trebåtfestivalen i Risør, minnemarkeringer og salutter.
+        </p>
+      </div>
+
+      <div data-aos="fade-up" data-aos-delay="250" class="flex flex-col gap-4">
+        <!-- Crew photo with white/light bg — use mix-blend to blend into dark bg -->
+        <div class="rounded-sm overflow-hidden border border-sand-300/10 bg-navy-900/20">
+          <img
+            src="/var-bat/jolle-crew.jpg"
+            alt="Kanonjolla Øster Riisøer 3 med besetning i historiske uniformer"
+            class="w-full object-contain max-h-72 mix-blend-luminosity opacity-80 hover:opacity-100 transition-opacity duration-500"
+            loading="lazy"
+          />
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-navy-900/40 border border-sand-300/10 rounded-sm p-5">
+            <p class="text-sand-400/50 text-xs tracking-widest uppercase mb-1">Hjemsted</p>
+            <p class="text-sand-200/80 text-sm">Risør, Norge</p>
+          </div>
+          <div class="bg-navy-900/40 border border-sand-300/10 rounded-sm p-5">
+            <p class="text-sand-400/50 text-xs tracking-widest uppercase mb-1">Opprinnelse</p>
+            <p class="text-sand-200/80 text-sm">1807–1814</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Restoration photo -->
+    <div data-aos="fade-up" class="border border-sand-300/10 rounded-sm overflow-hidden relative group">
+      <img
+        src="/var-bat/restaurering.jpg"
+        alt="Restaurering av kanonjolla i verksted"
+        class="w-full h-64 sm:h-80 object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-navy-950/80 to-transparent flex items-end sm:items-center p-8">
+        <div>
+          <p class="text-sand-400/70 text-xs tracking-[0.25em] uppercase mb-2">Under arbeid</p>
+          <p class="font-serif text-xl sm:text-2xl text-sand-100">Restaurering pågår</p>
+          <p class="text-sand-300/60 text-sm mt-2 max-w-sm">Motor og årer skiftes — jolla forberedes for nye tokt i historiske farvann.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

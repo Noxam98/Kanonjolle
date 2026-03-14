@@ -1,0 +1,72 @@
+---
+const aktiviteter = [
+  {
+    title: "Restaurering og vedlikehold",
+    desc: "Kontinuerlig arbeid med å restaurere og vedlikeholde vår historiske kanonjolle etter originale spesifikasjoner.",
+    img: "/var-bat/restaurering.jpg",
+  },
+  {
+    title: "Risør Trebåtfestival",
+    desc: "Deltakelse i Risørs store trebåtfestival med tre salutter — et høydepunkt i sesongen.",
+    img: "/aktiviteter/salve.jpg",
+  },
+  {
+    title: "Minnemarkeringer",
+    desc: "Historiske markeringer som Slaget på Lyngør 1812 — vi holder minnene om kystforsvaret levende.",
+    img: "/aktiviteter/festival.jpg",
+  },
+  {
+    title: "St. Barbra-feiring",
+    desc: "Feiring av artilleristenes skytshelgen St. Barbra — en tradisjon med røtter i 1800-tallets marine.",
+    img: "/aktiviteter/stbarbra.jpg",
+  },
+  {
+    title: "Julfeiring ombord",
+    desc: "Tradisjonsrik julfeiring ombord i historisk atmosfære, med sang og maritim stemning.",
+    img: "/aktiviteter/jul.jpg",
+  },
+  {
+    title: "Museumssamarbeid",
+    desc: "Samarbeid med museer og lokale krefter for å bevare og dokumentere kystforsvarets arv.",
+    img: "/aktiviteter/museum.webp",
+  },
+];
+---
+
+<section id="aktiviteter" class="relative z-10 bg-navy-950 py-24 sm:py-32 border-t border-sand-300/10">
+  <div class="max-w-5xl mx-auto px-6">
+    <div data-aos="fade-up">
+      <p class="text-sand-500 text-xs tracking-[0.3em] uppercase mb-4 font-light">04</p>
+      <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-sand-50 mb-6">Aktiviteter</h2>
+      <div class="w-12 h-px bg-sand-400/40 mb-8"></div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {aktiviteter.map((a, i) => (
+        <div
+          class="border border-sand-300/10 rounded-sm overflow-hidden bg-navy-900/30 group"
+          data-aos="fade-up"
+          data-aos-delay={String(i * 100)}
+        >
+          {a.img ? (
+            <div class="relative h-48 overflow-hidden">
+              <img
+                src={a.img}
+                alt={a.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-navy-950/70 to-transparent"></div>
+            </div>
+          ) : (
+            <div class="h-1 bg-gradient-to-r from-sand-400/20 to-transparent"></div>
+          )}
+          <div class="p-6">
+            <h3 class="font-serif text-base text-sand-100 mb-3">{a.title}</h3>
+            <p class="text-sand-400/70 text-sm leading-relaxed">{a.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
