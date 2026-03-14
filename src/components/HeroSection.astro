@@ -63,8 +63,8 @@ const compassTicks = Array.from({ length: 16 }, (_, i) => {
   </div>
 
   <!-- Compass Rose -->
-  <div class="absolute right-8 xl:right-24 top-1/2 -translate-y-1/2 hidden lg:block pointer-events-none select-none">
-    <svg id="compass-rose" width="160" height="160" viewBox="-72 -72 144 144" xmlns="http://www.w3.org/2000/svg" class="opacity-0">
+  <div class="absolute right-8 xl:right-24 top-1/2 -translate-y-1/2 hidden lg:block pointer-events-none select-none z-[3]" style="animation: compassFadeIn 1.5s ease 2s both;">
+    <svg id="compass-rose" width="160" height="160" viewBox="-72 -72 144 144" xmlns="http://www.w3.org/2000/svg">
       <!-- Outer ring -->
       <circle r="70" fill="none" stroke="rgba(201,187,166,0.15)" stroke-width="0.5" />
 
@@ -191,8 +191,6 @@ const compassTicks = Array.from({ length: 16 }, (_, i) => {
     setTimeout(() => { if (line) { line.style.transition = "transform 0.8s cubic-bezier(0.16,1,0.3,1)"; line.style.transform = "scaleX(1)"; } }, base + 200);
     setTimeout(() => { if (desc) { desc.style.transition = "opacity 0.8s ease, transform 0.8s ease"; desc.style.opacity = "1"; desc.style.transform = "translateY(0)"; } }, base + 500);
     setTimeout(() => { if (cta) { cta.style.transition = "opacity 0.8s ease, transform 0.8s ease"; cta.style.opacity = "1"; cta.style.transform = "translateY(0)"; } }, base + 800);
-    const compass = document.getElementById("compass-rose");
-    setTimeout(() => { if (compass) { compass.style.transition = "opacity 1.5s ease"; compass.style.opacity = "0.85"; } }, base + 1200);
   })();
 
   // Hero fade-out on scroll
@@ -212,3 +210,10 @@ const compassTicks = Array.from({ length: 16 }, (_, i) => {
     }, { passive: true });
   })();
 </script>
+
+<style>
+  @keyframes compassFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 0.85; }
+  }
+</style>
