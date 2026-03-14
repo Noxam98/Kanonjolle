@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx astro:*)",
+      "Bash(npm install:*)",
+      "WebFetch(domain:www.facebook.com)",
+      "Bash(git init:*)",
+      "Bash(git remote:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npm run:*)",
+      "Bash(mkdir -p public/var-bat)",
+      "Bash(cp \"src/37635084_1801634106552696_3139004980317388800_n.jpg\" public/hero-bg.jpg)",
+      "Bash(cp \"src/482352785_9272521056130593_9080537015941827015_n.jpg\" public/var-bat/jolle-crew.jpg)",
+      "Bash(cp \"src/54729273_2150521451663958_5768409174681583616_n.jpg\" public/var-bat/restaurering.jpg)",
+      "Bash(cp \"src/37644833_1802069189842521_5491317121902182400_n.jpg\" public/gallery/bilde-7.jpg)",
+      "Bash(cp \"src/36723793_1774850379231069_5537413128989442048_n.jpg\" public/gallery/bilde-8.jpg)",
+      "Bash(cp \"src/37296164_1790726080976832_1069261223922499584_n.jpg\" public/gallery/bilde-9.jpg)",
+      "Bash(cp \"src/44464979_1930679836981455_7783919726194851840_n.jpg\" public/aktiviteter/festival.jpg)",
+      "Bash(cp \"src/65298302_2287410917975010_5396830487090036736_n.jpg\" public/aktiviteter/salve.jpg)",
+      "Bash(cp \"src/47378506_1991591137556991_968729916562472960_n.jpg\" public/aktiviteter/stbarbra.jpg)",
+      "Bash(rm src/*_n.jpg)"
+    ],
+    "additionalDirectories": [
+      "/home/maks/jøb/båtSide"
+    ]
+  }
+}
