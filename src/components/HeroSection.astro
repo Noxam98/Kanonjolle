@@ -25,6 +25,29 @@ const compassTicks = Array.from({ length: 16 }, (_, i) => {
   <div class="absolute top-0 left-1/2 -translate-x-1/2 w-px h-32 bg-gradient-to-b from-transparent to-sand-400/30"></div>
 
   <div class="relative z-10 max-w-4xl mx-auto px-6 text-center" id="hero-content">
+    <!-- Compass Rose -->
+    <div class="pointer-events-none select-none flex justify-center mb-8" style="animation: compassFadeIn 1.5s ease 2s both;">
+      <svg width="120" height="120" viewBox="-72 -72 144 144" xmlns="http://www.w3.org/2000/svg">
+        <circle r="70" fill="none" stroke="rgba(201,187,166,0.15)" stroke-width="0.5" />
+        {compassTicks.map((t) => (
+          <line x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2}
+            stroke={`rgba(201,187,166,${t.isCard ? 0.4 : 0.18})`}
+            stroke-width={t.isCard ? 1 : 0.5} />
+        ))}
+        <polygon transform="rotate(45)"  points="0,-46 4,0 0,46 -4,0" fill="rgba(201,187,166,0.2)" />
+        <polygon transform="rotate(-45)" points="0,-46 4,0 0,46 -4,0" fill="rgba(201,187,166,0.2)" />
+        <polygon points="0,-62 7,0 -7,0"  fill="rgba(201,187,166,0.75)" />
+        <polygon points="0,62 7,0 -7,0"   fill="rgba(201,187,166,0.22)" />
+        <polygon points="62,0 0,7 0,-7"   fill="rgba(201,187,166,0.50)" />
+        <polygon points="-62,0 0,7 0,-7"  fill="rgba(201,187,166,0.22)" />
+        <circle r="7"   fill="none" stroke="rgba(201,187,166,0.35)" stroke-width="1" />
+        <circle r="2.5" fill="rgba(201,187,166,0.7)" />
+        <text x="0" y="-50" text-anchor="middle" dominant-baseline="middle"
+          font-size="9" font-family="Cormorant Garamond, Georgia, serif"
+          fill="rgba(201,187,166,0.65)" letter-spacing="2">N</text>
+      </svg>
+    </div>
+
     <p class="text-sand-400 text-xs sm:text-sm tracking-[0.3em] uppercase mb-6 font-light opacity-0" id="hero-anno">
       Øster Riisøer – Vester Riisøer | Risør
     </p>
@@ -62,41 +85,6 @@ const compassTicks = Array.from({ length: 16 }, (_, i) => {
     <div class="w-px h-12 bg-gradient-to-b from-sand-400/50 to-transparent animate-pulse"></div>
   </div>
 
-  <!-- Compass Rose -->
-  <div class="absolute right-8 xl:right-24 top-1/2 -translate-y-1/2 hidden lg:block pointer-events-none select-none z-[3]" style="animation: compassFadeIn 1.5s ease 2s both;">
-    <svg id="compass-rose" width="160" height="160" viewBox="-72 -72 144 144" xmlns="http://www.w3.org/2000/svg">
-      <!-- Outer ring -->
-      <circle r="70" fill="none" stroke="rgba(201,187,166,0.15)" stroke-width="0.5" />
-
-      <!-- Tick marks -->
-      {compassTicks.map((t) => (
-        <line
-          x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2}
-          stroke={`rgba(201,187,166,${t.isCard ? 0.4 : 0.18})`}
-          stroke-width={t.isCard ? 1 : 0.5}
-        />
-      ))}
-
-      <!-- Intercardinal arms (NE/NW/SE/SW) -->
-      <polygon transform="rotate(45)"  points="0,-46 4,0 0,46 -4,0" fill="rgba(201,187,166,0.2)" />
-      <polygon transform="rotate(-45)" points="0,-46 4,0 0,46 -4,0" fill="rgba(201,187,166,0.2)" />
-
-      <!-- Cardinal arms — two-tone: N & E bright, S & W dark -->
-      <polygon points="0,-62 7,0 -7,0"  fill="rgba(201,187,166,0.75)" /> <!-- N -->
-      <polygon points="0,62 7,0 -7,0"   fill="rgba(201,187,166,0.22)" /> <!-- S -->
-      <polygon points="62,0 0,7 0,-7"   fill="rgba(201,187,166,0.50)" /> <!-- E -->
-      <polygon points="-62,0 0,7 0,-7"  fill="rgba(201,187,166,0.22)" /> <!-- W -->
-
-      <!-- Center -->
-      <circle r="7"   fill="none" stroke="rgba(201,187,166,0.35)" stroke-width="1" />
-      <circle r="2.5" fill="rgba(201,187,166,0.7)" />
-
-      <!-- N label -->
-      <text x="0" y="-50" text-anchor="middle" dominant-baseline="middle"
-        font-size="9" font-family="Cormorant Garamond, Georgia, serif"
-        fill="rgba(201,187,166,0.65)" letter-spacing="2">N</text>
-    </svg>
-  </div>
 </section>
 
 <script>
@@ -211,7 +199,7 @@ const compassTicks = Array.from({ length: 16 }, (_, i) => {
   })();
 </script>
 
-<style>
+<style is:global>
   @keyframes compassFadeIn {
     from { opacity: 0; }
     to   { opacity: 0.85; }
