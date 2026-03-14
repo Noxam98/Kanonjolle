@@ -1,8 +1,20 @@
 ---
 import { Image } from 'astro:assets';
+
+const captions = [
+  "Kanonjolla i fart",
+  "Ombord på jolla",
+  "Historisk tokt",
+  "Risør havn",
+  "Besetningen",
+  "Under seil",
+  "Kanonjolla under seil",
+  "Kanon og historisk utstyr",
+  "Fortøyd i havnen",
+];
 ---
 
-<section id="bilder" class="relative z-10 bg-navy-950 py-24 sm:py-32 border-t border-sand-300/10">
+<section id="bilder" class="relative z-10 bg-navy-950 py-24 sm:py-32">
   <div class="max-w-5xl mx-auto px-6">
     <div data-aos="fade-up">
       <p class="text-sand-500 text-xs tracking-[0.3em] uppercase mb-4 font-light">03</p>
@@ -11,14 +23,14 @@ import { Image } from 'astro:assets';
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4" data-aos="fade-up" data-aos-delay="200" id="gallery-grid">
-      {Array.from({ length: 9 }).map((_, i) => (
+      {captions.map((caption, i) => (
         <button
-          class="gallery-thumb aspect-4/3 bg-navy-900/50 border border-sand-300/10 rounded-sm flex items-center justify-center overflow-hidden cursor-pointer group relative"
+          class="gallery-thumb aspect-4/3 bg-navy-900/50 border border-sand-300/10 rounded-sm flex items-center justify-center overflow-hidden cursor-pointer group relative @container"
           data-index={i}
         >
           <Image
             src={`/gallery/bilde-${i + 1}.jpg`}
-            alt={`Bilde ${i + 1}`}
+            alt={caption}
             width={800}
             height={600}
             class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:scale-105 transition-transform duration-500"
@@ -26,9 +38,13 @@ import { Image } from 'astro:assets';
             onload="this.style.opacity='1'"
             onerror="this.style.display='none'"
           />
-          <svg class="w-8 h-8 text-sand-400/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-8 h-8 text-sand-400/30 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
+          <!-- Hover caption -->
+          <div class="absolute inset-0 z-10 bg-navy-950/60 flex items-center justify-center overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <p class="font-serif text-sand-50 text-center leading-none px-2 w-full" style="font-size: clamp(1.8rem, 8cqi, 5rem);">Åpne i fullskjerm</p>
+          </div>
         </button>
       ))}
     </div>

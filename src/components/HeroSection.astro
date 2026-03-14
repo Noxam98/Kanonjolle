@@ -17,6 +17,9 @@ const compassTicks = Array.from({ length: 16 }, (_, i) => {
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden sticky top-0 z-0" id="hero">
   <canvas id="grain" class="pointer-events-none absolute inset-0 z-[2] opacity-[0.04] w-full h-full"></canvas>
 
+  <!-- Vignette -->
+  <div class="pointer-events-none absolute inset-0 z-[3]" style="background: radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(7,11,20,0.1) 78%, rgba(7,11,20,0.22) 100%);"></div>
+
   <div class="absolute inset-0 bg-gradient-to-b from-navy-900 via-navy-950 to-navy-950" id="hero-bg">
     <div class="absolute inset-[-20%] bg-cover bg-center opacity-30 will-change-transform hero-parallax-bg" id="hero-parallax"></div>
     <div class="absolute inset-0 bg-navy-950/40"></div>

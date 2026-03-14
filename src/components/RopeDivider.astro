@@ -1,0 +1,43 @@
+---
+interface Props { id?: string; }
+const { id = "r" } = Astro.props;
+const sp = 17.46;
+const link = (ox: number) => `M ${ox},32.53 C ${16.07+ox},40.31 ${21.99+ox},22.45 ${37.36+ox},12.86 C ${22.4+ox},3.68 ${11.9+ox},27.07 ${ox},32.53Z`;
+---
+
+<div class="relative z-10 bg-navy-950 rope-divider" aria-hidden="true" style="--rope-progress:0%;">
+  <svg width="100%" height="44" xmlns="http://www.w3.org/2000/svg" style="-webkit-mask-image: linear-gradient(to right, transparent calc(50% - var(--rope-progress) - 3%), black calc(50% - var(--rope-progress)), black calc(50% + var(--rope-progress)), transparent calc(50% + var(--rope-progress) + 3%)); mask-image: linear-gradient(to right, transparent calc(50% - var(--rope-progress) - 3%), black calc(50% - var(--rope-progress)), black calc(50% + var(--rope-progress)), transparent calc(50% + var(--rope-progress) + 3%));">
+    <defs>
+      <pattern id={`rope-${id}`} width={sp} height="44" patternUnits="userSpaceOnUse">
+        <path d={link(-sp)} fill="rgba(175,160,125,0.45)" stroke="rgba(25,22,12,0.5)" stroke-width="1.2"/>
+        <path d={link(0)}   fill="rgba(175,160,125,0.45)" stroke="rgba(25,22,12,0.5)" stroke-width="1.2"/>
+        <path d={link(sp)}  fill="rgba(175,160,125,0.45)" stroke="rgba(25,22,12,0.5)" stroke-width="1.2"/>
+        <path d={`M ${-sp+6},30 C ${-sp+14},35 ${-sp+18},25 ${-sp+28},18`} stroke="rgba(220,210,185,0.18)" stroke-width="2" fill="none"/>
+        <path d="M 6,30 C 14,35 18,25 28,18" stroke="rgba(220,210,185,0.18)" stroke-width="2" fill="none"/>
+        <path d={`M ${sp+6},30 C ${sp+14},35 ${sp+18},25 ${sp+28},18`} stroke="rgba(220,210,185,0.18)" stroke-width="2" fill="none"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="44" fill={`url(#rope-${id})`}/>
+  </svg>
+</div>
+
+<script>
+  const ropes = document.querySelectorAll<HTMLElement>('.rope-divider');
+  let ticking = false;
+
+  const update = () => {
+    ropes.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      const progress = 1 - (rect.top / (window.innerHeight * 0.85));
+      const clamped = Math.max(0, Math.min(1, progress));
+      el.style.setProperty('--rope-progress', `${clamped * 55}%`);
+    });
+    ticking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+
+  update();
+</script>

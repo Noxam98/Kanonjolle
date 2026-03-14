@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 ---
 
-<section id="var-bat" class="relative z-10 bg-navy-950 py-24 sm:py-32 border-t border-sand-300/10">
+<section id="var-bat" class="relative z-10 bg-navy-950 py-24 sm:py-32">
   <div class="max-w-5xl mx-auto px-6">
     <div data-aos="fade-up">
       <p class="text-sand-500 text-xs tracking-[0.3em] uppercase mb-4 font-light">02</p>
@@ -11,7 +11,7 @@ import { Image } from 'astro:assets';
     </div>
 
     <!-- Main boat photo + text -->
-    <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+    <div class="grid md:grid-cols-2 gap-12 items-center mb-12">
       <div data-aos="fade-up" data-aos-delay="100">
         <p class="text-sand-400/80 text-xs tracking-[0.2em] uppercase mb-3 font-light">Kanonjolla</p>
         <h3 class="font-serif text-2xl sm:text-3xl text-sand-50 mb-4">Øster Riisøer 3</h3>
@@ -38,7 +38,6 @@ import { Image } from 'astro:assets';
       </div>
 
       <div data-aos="fade-up" data-aos-delay="250" class="flex flex-col gap-4">
-        <!-- Crew photo with white/light bg — use mix-blend to blend into dark bg -->
         <div class="rounded-sm overflow-hidden border border-sand-300/10 bg-navy-900/20">
           <Image
             src="/var-bat/jolle-crew.jpg"
@@ -62,14 +61,16 @@ import { Image } from 'astro:assets';
       </div>
     </div>
 
-    <!-- Restoration photo -->
-    <div data-aos="fade-up" class="border border-sand-300/10 rounded-sm overflow-hidden relative group">
+    <!-- Restoration photo with parallax -->
+    <div data-aos="fade-up" class="border border-sand-300/10 rounded-sm overflow-hidden relative group h-64 sm:h-80" id="restaurering-wrap">
       <Image
+        id="restaurering-img"
         src="/var-bat/restaurering.jpg"
         alt="Restaurering av kanonjolla i verksted"
         width={1400}
         height={800}
-        class="w-full h-64 sm:h-80 object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+        class="absolute inset-x-0 w-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 will-change-transform"
+        style="height: 130%; top: -15%;"
         loading="lazy"
       />
       <div class="absolute inset-0 bg-gradient-to-r from-navy-950/80 to-transparent flex items-end sm:items-center p-8">
@@ -82,3 +83,26 @@ import { Image } from 'astro:assets';
     </div>
   </div>
 </section>
+
+<script>
+  // Parallax on restoration banner
+  (() => {
+    const img = document.getElementById("restaurering-img") as HTMLElement;
+    const wrap = document.getElementById("restaurering-wrap");
+    if (!img || !wrap) return;
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const rect = wrap.getBoundingClientRect();
+        if (rect.bottom > 0 && rect.top < window.innerHeight) {
+          const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+          img.style.transform = `translateY(${(progress - 0.5) * 30}%)`;
+        }
+        ticking = false;
+      });
+    }, { passive: true });
+  })();
+
+</script>
